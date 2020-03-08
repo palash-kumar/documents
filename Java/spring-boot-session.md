@@ -14,14 +14,14 @@ ref: [dzone.com](https://dzone.com/articles/spring-jdbc-session)
 <h4>Adding Dependencies</h4>
 
 
-><dependency>
+> <dependency>
 >    <groupId>org.springframework.session</groupId>
 >    <artifactId>spring-session-core</artifactId>
-></dependency>
-><dependency>
+> </dependency>
+> <dependency>
 >    <groupId>org.springframework.session</groupId>
 >    <artifactId>spring-session-jdbc</artifactId>
-></dependency>
+> </dependency>
 
 
 <h4>Configure Spring JDBC Session Properties</h4>
