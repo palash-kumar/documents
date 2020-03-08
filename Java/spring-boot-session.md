@@ -13,7 +13,7 @@ ref: [dzone.com](https://dzone.com/articles/spring-jdbc-session)
 
 <h4>Adding Dependencies</h4>
 
-`
+````
  <dependency>
     <groupId>org.springframework.session</groupId>
     <artifactId>spring-session-core</artifactId>
@@ -22,76 +22,79 @@ ref: [dzone.com](https://dzone.com/articles/spring-jdbc-session)
     <groupId>org.springframework.session</groupId>
     <artifactId>spring-session-jdbc</artifactId>
  </dependency>
-`
+````
 
 <h4>Configure Spring JDBC Session Properties</h4>
 
 The  `application.properties` file specifies the H2 database configuration and Spring Session attributes.
 
-># Session store type.
+```
+# Session store type.
 
->spring.session.store-type=jdbc
+spring.session.store-type=jdbc
 
-># Database schema initialization mode.
+# Database schema initialization mode.
 
->spring.session.jdbc.initialize-schema=embedded
+spring.session.jdbc.initialize-schema=embedded
 
-># Path to the SQL file to use to initialize the database schema.
+# Path to the SQL file to use to initialize the database schema.
 
->spring.session.jdbc.schema=`classpath:/session-db-script.sql` 
+spring.session.jdbc.schema=`classpath:/session-db-script.sql` 
 
-># Name of the database table used to store sessions.
+# Name of the database table used to store sessions.
 
->spring.session.jdbc.table-name=SPRING_SESSION
+spring.session.jdbc.table-name=SPRING_SESSION
 
->spring.session.timeout=`30m`
-
+spring.session.timeout=`30m`
+```
 
 We added the property  `spring.session.store-type=jdbc`. Here, we specify using JDBC to store the session data.
 As we are using the H2 in-memory database, Spring Session creates the following tables required to store the session data automatically from the script:
 
->CREATE SCHEMA IF NOT EXISTS TESTDB;`Not required if schema is already created`
+```
+CREATE SCHEMA IF NOT EXISTS TESTDB; `Not required if schema is already created`
 
->SET SCHEMA TESTDB;`Not required if schema is already created`
+SET SCHEMA TESTDB; `Not required if schema is already created`
 
->CREATE TABLE `TESTDB`.SPRING_SESSION (
+CREATE TABLE TESTDB.SPRING_SESSION (
 
->PRIMARY_ID CHAR(36) NOT NULL,
+PRIMARY_ID CHAR(36) NOT NULL,
 
->SESSION_ID CHAR(36) NOT NULL,
+SESSION_ID CHAR(36) NOT NULL,
 
->CREATION_TIME BIGINT NOT NULL,
+CREATION_TIME BIGINT NOT NULL,
 
->LAST_ACCESS_TIME BIGINT NOT NULL,
+LAST_ACCESS_TIME BIGINT NOT NULL,
 
->MAX_INACTIVE_INTERVAL INT NOT NULL,
+MAX_INACTIVE_INTERVAL INT NOT NULL,
 
->EXPIRY_TIME BIGINT NOT NULL,
+EXPIRY_TIME BIGINT NOT NULL,
 
->PRINCIPAL_NAME VARCHAR(100),
+PRINCIPAL_NAME VARCHAR(100),
 
->CONSTRAINT SPRING_SESSION_PK PRIMARY KEY (PRIMARY_ID)
+CONSTRAINT SPRING_SESSION_PK PRIMARY KEY (PRIMARY_ID)
 
->);
+);
 
->CREATE UNIQUE INDEX SPRING_SESSION_IX1 ON `TESTDB`.SPRING_SESSION (SESSION_ID);
+CREATE UNIQUE INDEX SPRING_SESSION_IX1 ON TESTDB.SPRING_SESSION (SESSION_ID);
 
->CREATE INDEX SPRING_SESSION_IX2 ON `TESTDB`.SPRING_SESSION (EXPIRY_TIME);
+CREATE INDEX SPRING_SESSION_IX2 ON TESTDB.SPRING_SESSION (EXPIRY_TIME);
 
->CREATE INDEX SPRING_SESSION_IX3 ON `TESTDB`.SPRING_SESSION (PRINCIPAL_NAME);
+CREATE INDEX SPRING_SESSION_IX3 ON TESTDB.SPRING_SESSION (PRINCIPAL_NAME);
 
->CREATE TABLE `TESTDB`.SPRING_SESSION_ATTRIBUTES (
+CREATE TABLE TESTDB.SPRING_SESSION_ATTRIBUTES (
 
->SESSION_PRIMARY_ID CHAR(36) NOT NULL,
+SESSION_PRIMARY_ID CHAR(36) NOT NULL,
 
->ATTRIBUTE_NAME VARCHAR(200) NOT NULL,
+ATTRIBUTE_NAME VARCHAR(200) NOT NULL,
 
->ATTRIBUTE_BYTES BLOB NOT NULL,
+ATTRIBUTE_BYTES BLOB NOT NULL,
 
->CONSTRAINT SPRING_SESSION_ATTRIBUTES_PK PRIMARY KEY (SESSION_PRIMARY_ID, ATTRIBUTE_NAME),
+CONSTRAINT SPRING_SESSION_ATTRIBUTES_PK PRIMARY KEY (SESSION_PRIMARY_ID, ATTRIBUTE_NAME),
 
->CONSTRAINT SPRING_SESSION_ATTRIBUTES_FK FOREIGN KEY (SESSION_PRIMARY_ID) REFERENCES `TESTDB`.SPRING_SESSION(PRIMARY_ID) ON DELETE >CASCADE
+CONSTRAINT SPRING_SESSION_ATTRIBUTES_FK FOREIGN KEY (SESSION_PRIMARY_ID) REFERENCES TESTDB.SPRING_SESSION(PRIMARY_ID) ON DELETE CASCADE
 
->);
+);
+```
 
 If we specify `spring.session.jdbc.initialize-schema=never`, then we need to create session tables in manually executing the script. In production, we don't enable the auto-create/update.
