@@ -98,3 +98,5 @@ CONSTRAINT SPRING_SESSION_ATTRIBUTES_FK FOREIGN KEY (SESSION_PRIMARY_ID) REFEREN
 ```
 
 If we specify `spring.session.jdbc.initialize-schema=never`, then we need to create session tables in manually executing the script. In production, we don't enable the auto-create/update.
+
+>When implementing Spring boot JDBC session the model classes are required to implement serializeable. Eg: public class Users `implements Serializable`
