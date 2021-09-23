@@ -211,7 +211,7 @@ tr '[:lower:]' '[:upper:]' < $1
 * Deleting array elements
 * creating hybrid arrays
 
-**Creating your first array**
+#### Creating your first array
 Generally when we are working with multiple variables it becomes cluttered with the variable declaration. Therefore using an array would be a good idea to manage multiple variables without declaring them seperately. example:
 
 > File created **timestamp.sh**
@@ -237,7 +237,7 @@ files=("f1.txt" "f2.txt" "f3.txt" "f4.txt")
 echo ${files[*]}
 ```
 
-**Accessing array elements**
+#### Accessing array elements
 In bash we access the array elements in this way *${files[0]}*. In the previous section we have created an array (*timestamp.sh*), here we will access the array elements and print them in reverse order.
 
 As in other programming languages an *array* index starts with **0**. For example if there are 10 elements in an array *("a" "b" "c" "d" "e" "f" "g" "h" "i" "j")* so index for the first element *"a"* will be @ 0 and index for the last element will be @ 9 means array index are always *n-1*, where *n* is the total umber of elements in an array, in this case *n=10*.
@@ -270,7 +270,7 @@ echo ${files[3]} ${files[2]} ${files[1]} ${files[0]}
 
 Changing an array element value *${files[0]}="a.txt"*
 
-**Adding array elements**
+#### Adding array elements
 To assign a new array element to the existing array we have to simpy pass it as an array value. 
 
 > File created **distros.sh**
@@ -287,7 +287,7 @@ distros+=("Kali")
 echo ${distros[*]}
 ```
 
-**Deleting array elements**
+#### Deleting array elements
 Deleting or removing an array element is also necessary as adding an element to the array.
 
 > File created **numbers.sh**
@@ -311,7 +311,7 @@ echo ${num[*]}
 
 > using **unset** a variable can also be unset and clear the variable.
 
-**creating hybrid arrays**
+#### creating hybrid arrays
 In this section we will be creating an hybrid array.
 
 > File created **user.sh**
@@ -328,7 +328,7 @@ echo "User Shell: ${user[3]}"
 
 ```
 
-**Bash Challenge #3:**
+#### Bash Challenge #3:
 Sort an Array
 Consider the following sorted.sh bash script:
 
@@ -373,13 +373,13 @@ echo ${num[@]}
 * Powers and Remainders
 * Celsius to Farenheit Calculator
 
-**Addition and Subtraction**
+#### Addition and Subtraction
 
-**Multiplication and Division**
+#### Multiplication and Division
 
-**Powers and Remainders**
+#### Powers and Remainders
 
-**Celsius to Farenheit Calculator**
+#### Celsius to Farenheit Calculator
 
 ### M-6 Bash Arrays
 
