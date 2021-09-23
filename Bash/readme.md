@@ -43,7 +43,7 @@ export PATH=$PATH:/mnt/f/GIT_Docs/documents/Bash/scripts
 > To print number of CPU cores **nproc**
 
 ### M-2
-**Variables**
+#### *Variables*
 > Bash does not have data types.
 
 ```shell
@@ -56,7 +56,7 @@ No Idea
 ```
 From above example it we can see that the variable *age* is declared and initiated as 24, and later on the same variable was assigned a string value, and provided output without any exception.
 
-**Constant Variables**
+#### *Constant Variables*
 In bash a constant variable is declared by using a keyword *readonly*
 
 ```shell
@@ -68,7 +68,7 @@ zsh: read-only variable: pi
 ```
 As it can be seen that the value of *pi* canot be chaged once it was declared with *readonly* keyword.
 
-**Command Substitution**
+#### *Command Substitution*
 We can substitute the command with a variable by declaring the command to a variable. But to declare a command to a variable we have to follow some syntax. The syntax are **$(command)** and **`command`**
 
 ```shell
@@ -83,7 +83,7 @@ Wed Sep 22 13:56:22 +06 2021
 
 In command substitution it's better to use **$(command)** as it supports nested commands.
 
-**Bash Challenge #2:**
+#### *Bash Challenge #2:*
 Print Calendar of a given year
 Create a bash script named *cal.sh* that would display the calendar of given year.
 
@@ -102,7 +102,7 @@ read yr
 cal "$yr"
 ```
 ### M-3
-**Passing one Argument to script**
+#### *Passing one Argument to script*
 The following is a general script to count number of lines in a file. Which prompts the user to provide a filename than it counts number of lines in the give filename and echo's the output:
 
 > File created count_lines_prompt.sh
@@ -133,7 +133,7 @@ echo "There are $nlines in $1"
 
 Here *$1* represents the first argument provided.
 
-**Passing Multiple Argument to script**
+#### *Passing Multiple Argument to script*
 Here we will see how to manage multiple arguments, instead of reading the arguments.
 
 > File created **count_lines_multiple_args.sh**
@@ -150,7 +150,7 @@ echo "There are $n2 in $2"
 echo "There are $n3 in $3"
 ```
 
-**Getting creative with arguments**
+#### *Getting creative with arguments*
 In this section we will get familier with the usage of shell script command, where we can turn the complex commands to a simple script and make it simple.
 
 > File created **find.sh**
@@ -163,7 +163,7 @@ find / -iname $1 2> /dev/null
 
 In the above script *find* is the command we will be using and */* is the path where it should start finding and *$1* is the argument; and **2> /dev/null** is used to redirect the errors to nowhere.  
 
-**Special Bash Variables**
+#### *Special Bash Variables*
 
 | Special Variable | Description |
 | ----------- | ----------- |
@@ -185,7 +185,7 @@ echo "The number of arguments is $#"
 echo "The value of all argument is: $@"
 ```
 
-**Bash Challenge #2:**
+#### *Bash Challenge #3:*
 Convert Case
 Create a bash script named *upper.sh* that would display a file content in upper case letters.
 
@@ -211,7 +211,7 @@ tr '[:lower:]' '[:upper:]' < $1
 * Deleting array elements
 * creating hybrid arrays
 
-#### Creating your first array
+#### *Creating your first array*
 Generally when we are working with multiple variables it becomes cluttered with the variable declaration. Therefore using an array would be a good idea to manage multiple variables without declaring them seperately. example:
 
 > File created **timestamp.sh**
@@ -237,7 +237,7 @@ files=("f1.txt" "f2.txt" "f3.txt" "f4.txt")
 echo ${files[*]}
 ```
 
-#### Accessing array elements
+#### *Accessing array elements*
 In bash we access the array elements in this way *${files[0]}*. In the previous section we have created an array (*timestamp.sh*), here we will access the array elements and print them in reverse order.
 
 As in other programming languages an *array* index starts with **0**. For example if there are 10 elements in an array *("a" "b" "c" "d" "e" "f" "g" "h" "i" "j")* so index for the first element *"a"* will be @ 0 and index for the last element will be @ 9 means array index are always *n-1*, where *n* is the total umber of elements in an array, in this case *n=10*.
@@ -270,7 +270,7 @@ echo ${files[3]} ${files[2]} ${files[1]} ${files[0]}
 
 Changing an array element value *${files[0]}="a.txt"*
 
-#### Adding array elements
+#### *Adding array elements*
 To assign a new array element to the existing array we have to simpy pass it as an array value. 
 
 > File created **distros.sh**
@@ -287,7 +287,7 @@ distros+=("Kali")
 echo ${distros[*]}
 ```
 
-#### Deleting array elements
+#### *Deleting array elements*
 Deleting or removing an array element is also necessary as adding an element to the array.
 
 > File created **numbers.sh**
@@ -311,7 +311,7 @@ echo ${num[*]}
 
 > using **unset** a variable can also be unset and clear the variable.
 
-#### creating hybrid arrays
+#### *creating hybrid arrays*
 In this section we will be creating an hybrid array.
 
 > File created **user.sh**
@@ -328,7 +328,7 @@ echo "User Shell: ${user[3]}"
 
 ```
 
-#### Bash Challenge #3:
+#### *Bash Challenge #4:*
 Sort an Array
 Consider the following sorted.sh bash script:
 
