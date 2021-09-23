@@ -367,7 +367,7 @@ echo "After sorting array num: "
 echo ${num[@]}
 ```
 
-### M-5 Basic Arethmatic Operations
+### <span style="color: #48A14D;">M-5 Basic Arethmatic Operations </span>
 * Addition and Subtraction
 * Multiplication and Division
 * Powers and Remainders
