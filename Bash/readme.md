@@ -368,25 +368,191 @@ echo ${num[@]}
 ```
 
 ### *M-5 Basic Arethmatic Operations*
+In this section we will learn about how to perform arethmatic operation in bash script. To perform an arethmatic operation we have to use the following syntax *$((arethmatic-exression))*.
+
 * Addition and Subtraction
 * Multiplication and Division
 * Powers and Remainders
 * Celsius to Farenheit Calculator
 
-#### Addition and Subtraction
+#### *Addition and Subtraction*
+In this section we will be taking two files as parameters and calculate their dispace.
 
-#### Multiplication and Division
+> File created **addition.sh**
 
-#### Powers and Remainders
+```shell
+#!/bin/bash
 
-#### Celsius to Farenheit Calculator
+fs1=$(du -b $1 | cut -f1)
+fs2=$(du -b $2 | cut -f1)
 
-### M-6 Bash Arrays
+echo $(du -b $1)
 
-### M-7 Bash Arrays
+echo "File size of $1 is: $fs1 bytes"
+echo "File size of $2 is: $fs2 bytes"
 
-### M-8 Bash Arrays
+total=$(($fs1 + $fs2))
 
-### M-9 Bash Arrays
+echo "Total size is: $total bytes"
+```
 
-### M-10 Bash Arrays
+In the above script we have used *du* command which stands for **disk usage**, and '-b' for **bytes**; than we have used pipe and *cut -f1* to get the first field form the output.
+
+> Same procedure can be followed for *subtraction*
+
+#### *Multiplication and Division*
+In this section for multiplication we will be converting GB (Gigabyte) to MB (Megabyte). We will pass a number as a parameter than convert it to MB and Display the result.
+
+> File created **giga2mega.sh**
+```shell
+#!/bin/bash
+
+GIGA=$1
+MEGA=$(($GIGA * 1024))
+KIB=$(($MEGA * 1024))
+echo "$GIGA GB = $MEGA MB = $KIB KB"
+```
+Now when we try to solve a mathematical expression the result will be truncated and integer part of the result will be shown. For example if we try to solve the following exression *$((5/2))* we will get *2* as a result insted of *2.5*. Therefore to print the correct result we can use basic calculator and standard libray the following way: **echo "5/2" | bc -l** where bc stands for *basic calculator* and -l stands for standard library. 
+
+> File Created **decimal_calc.sh**
+
+```shell
+#!/bin/bash
+
+# The following result will not print the decimal number.
+echo $((5/2))
+
+# To print a decimal number we are to pass the equation to bc or basic calculator
+echo "5/2" | bc -l
+
+echo "2.5 * 3" | bc -l
+```
+#### *Powers and Remainders*
+By now we are already familier with the basic operators such as Addition, Subtraction, Multiplication and division. In this part we will learn how to work with *Powers and remainders*.
+
+> File Created **power.sh**
+
+```shell
+#!/bin/bash
+
+a=$1
+b=$2
+
+# Power
+result=$(($a**$b))
+
+echo "$a^$b = $result"
+
+# Remainder
+
+remainder=$(($a%$b))
+
+echo "$a%$b = $remainder"
+```
+
+#### *Celsius to Farenheit Calculator*
+
+> File Created **c2f.sh**
+
+```shell
+#!/bin/bash
+
+C=$1
+
+F=$(echo "scale=2; $C * (9/5)+32" | bc -l)
+
+echo "$C degrees Celcius is equal to $F degrees Farenheit."
+```
+
+#### *Bash Challenge #5:*
+Calculate net salary
+
+Create a bash script named salary.sh that would calculate the total net salary of an employee. The script would prompt the user to enter a monthly gross salary (before) and a tax rate (in percentage). Finally, the script would calculate and output the total net annual salary (after tax).
+
+Hint: Use the bc command to handle decimals.
+
+Your output should be similar to this:
+
+```shell
+elliot@allsafe:~/scripts$ ./salary.sh
+Please enter your monthly gross salary: 5000
+Please enter your tax rate (in percentage): 10
+Your total net annual salary is: 54000.00
+```
+
+### M-6 String Operations in Bash
+
+* Getting String Length
+* Concatenating Strings
+* Finding Substrings
+* Extracting Substrings
+* Replacing Substrings
+* Deleting Substrings
+* Converting Upper & Lowercase Letters
+
+#### *Getting String Length*
+In bash to get a string length we can use syntax *${#}*
+
+> File Created **stringLength.sh**
+
+```shell
+#!/bin/bash
+
+str=$1
+
+echo "Length of '${str}' is ${#str}"
+```
+
+#### *Concatenating Strings*
+
+In this section we will get to know how to concate strings together. 
+
+> File Created **concat.sh**
+
+```shell
+#!/bin/bash
+
+str1="Mr."
+str2=" Aryan"
+
+str3=$str1$str2
+
+echo "Concated string is ${str3}"
+```
+
+#### *Finding Substrings*
+
+Here we will learn hwo to find substring from a given string or text. As the name suggest *substring* is the part of a string which we are looking for or we want to find out.
+
+> File Created **FindSubStr.sh**
+
+```shell
+#!/bin/bash
+
+str="Bash is Cool"
+search="Cool"
+
+expr index "$str" "$search"
+
+expr index "$str" "ash"
+
+expr index "$str" "123"
+```
+
+where *expr* stands for **expression**. When we are trying to find index of a substring the count starts with index=1 unlike array where count starts with index=0.
+
+when searching for a substring in a given string it if the string is found it will print the *index number* where the string has started, and if the substring which we are searching for is not found than it will print *0*. 
+
+>Substring can also be a part of a word. For example the second *expression* in the sample code we are searching for the substring **ash** which is a part of the word **Bash** in the string.
+
+### M-7 Decision Making in Bash
+
+### M-8 Bash Loops
+
+### M-9 Bash Functions
+
+### M-10 Automating Boring Tasks with bash
+
+### M-11 More Bash
+
+### M-11 More Bash

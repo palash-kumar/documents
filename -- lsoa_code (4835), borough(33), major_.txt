@@ -1,0 +1,101 @@
+-- lsoa_code (4835), borough(33), major_category(9), minor_category(32), value(int), year(int)(9), month(int)(12)
+-- Total Data: 13490604
+
+-- select * from ETL_Data_Pipe.crime_by_lsoa;
+
+-- total distinct lsoa_code in dataset
+-- select count(distinct(lsoa_code)) from ETL_Data_Pipe.crime_by_lsoa;
+
+-- getting data for each group of lsoa_code
+-- select lsoa_code, count(*) from ETL_Data_Pipe.crime_by_lsoa group by lsoa_code;
+
+-- select count(distinct(month)) from ETL_Data_Pipe.crime_by_lsoa;
+
+-- major and minor category returns same result for each borough
+-- select borough, count(major_category) as mc_crime from ETL_Data_Pipe.crime_by_lsoa group by borough;
+
+select sum(value) as no_crime from ETL_Data_Pipe.crime_by_lsoa;
+
+-- no_of_lsoa_code per borough
+select borough, count(distinct(lsoa_code)) as no_of_lsoa_code from ETL_Data_Pipe.crime_by_lsoa group by borough;
+
+select borough, lsoa_code from ETL_Data_Pipe.crime_by_lsoa where borough = 'City of London' and lsoa_code='E01000001' group by borough, lsoa_code;
+
+select  borough, lsoa_code, count(lsoa_code), sum(value) as no_of_crimes from ETL_Data_Pipe.crime_by_lsoa where borough = 'City of London' and lsoa_code='E01000001' group by borough, lsoa_code;
+
+-- **** work
+select  borough, lsoa_code, count(lsoa_code) as occurance_of_lsoa_code, sum(value) as no_of_crimes from ETL_Data_Pipe.crime_by_lsoa group by borough, lsoa_code;
+
+-- **** work with where value!=0
+select  borough, lsoa_code, count(lsoa_code) as occurance_of_lsoa_code, sum(value) as no_of_crimes from ETL_Data_Pipe.crime_by_lsoa  where value!=0 group by borough, lsoa_code order by lsoa_code asc;
+
+--================
+
+select  borough, lsoa_code, year, count(lsoa_code) as occurance_of_lsoa_code, sum(value) as no_of_crimes 
+from ETL_Data_Pipe.crime_by_lsoa 
+where  lsoa_code='E01000001' 
+group by borough, lsoa_code, year;
+
+-- borough, lsoa_code, year, count(lsoa_code) as occurance_of_lsoa_code(43515)
+select  borough, lsoa_code, year, count(lsoa_code) as occurance_of_lsoa_code, sum(value) as no_of_crimes from ETL_Data_Pipe.crime_by_lsoa group by borough, lsoa_code, year order by lsoa_code asc;
+
+-- borough, lsoa_code, year, count(lsoa_code) as occurance_of_lsoa_code(42923) & value!=0
+select  borough, lsoa_code, year, count(lsoa_code) as occurance_of_lsoa_code, sum(value) as no_of_crimes from ETL_Data_Pipe.crime_by_lsoa where value!=0 group by borough, lsoa_code, year order by lsoa_code asc;
+
+--================
+
+-- no_of_crime by each borough (33)
+select borough, sum(value) as no_crime from ETL_Data_Pipe.crime_by_lsoa group by borough;
+ 
+-- no_of_crime by each borough, and year (297)
+select borough, year, sum(value) as no_crime from ETL_Data_Pipe.crime_by_lsoa group by borough, year;
+ 
+-- no_of_crime by each borough, and month (396)
+select borough, month, sum(value) as no_crime from ETL_Data_Pipe.crime_by_lsoa group by borough, month;
+ 
+-- no_of_crime by each borough, and month (3564)
+select borough, year, month, sum(value) as no_crime from ETL_Data_Pipe.crime_by_lsoa group by borough, year, month;
+ 
+-- no_of_crime by each borough, major_category, year, month (31860)
+select borough, major_category, year, month, sum(value) as no_crime from ETL_Data_Pipe.crime_by_lsoa group by borough, major_category, year, month;
+ 
+-- no_of_crime by each year, and month (108)
+select year, month, sum(value) as no_crime from ETL_Data_Pipe.crime_by_lsoa group by year, month order by month asc;
+
+-- no_of_crimes by year(9)
+select year, sum(value) as no_of_crime from ETL_Data_Pipe.crime_by_lsoa group by year;
+
+-- no_of_crimes by month(12)
+select month, sum(value) as no_of_crime from ETL_Data_Pipe.crime_by_lsoa group by month;
+
+-- no_of_minor_category under each major_category
+select major_category, count(distinct(minor_category)) as no_of_minor_category from ETL_Data_Pipe.crime_by_lsoa group by major_category;
+
+-- no_of_crimes under each major_category(9)
+select major_category, sum(value) as no_of_crime from ETL_Data_Pipe.crime_by_lsoa group by major_category;
+
+-- no_of_crimes under each minor_category(32)
+select minor_category, sum(value) as no_of_crime from ETL_Data_Pipe.crime_by_lsoa group by minor_category;
+
+-- Harassment - 458124
+
+-- no_of_crimes by year, minor_category(288)
+select year, minor_category, sum(value) as no_of_crime from ETL_Data_Pipe.crime_by_lsoa group by year, minor_category;
+
+-- no_of_crimes by year, major_category(81)
+select year, major_category, sum(value) as no_of_crime from ETL_Data_Pipe.crime_by_lsoa group by year, major_category;
+
+select major_category, sum(value) as no_of_crime from ETL_Data_Pipe.crime_by_lsoa where major_category='Violence Against the Person' group by  major_category;
+
+-- no_of_crimes by year, month, minor_category(3456)
+select year, month, minor_category, sum(value) as no_of_crime from ETL_Data_Pipe.crime_by_lsoa group by year, month, minor_category;
+
+-- no_of_crimes by year, month, major_category(972)
+select year, month, major_category, sum(value) as no_of_crime from ETL_Data_Pipe.crime_by_lsoa group by year, month, major_category;
+
+ select year, month from ETL_Data_Pipe.crime_by_lsoa group by year, month order by year asc;
+ 
+ select distinct(minor_category) as minor_category from ETL_Data_Pipe.crime_by_lsoa where major_category='Theft and Handling';
+
+
+01823074840
