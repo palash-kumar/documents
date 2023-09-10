@@ -95,4 +95,4 @@ The physical layer is right down to the hardware of the computer. This is where 
 
 ## Encapsulation
 
-<img src='/assets/IntroductoryNetworking/EncapsulatedData.jpeg'>
+<img src='./assets/IntroductoryNetworking/EncapsulatedData.jpeg'>
