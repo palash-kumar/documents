@@ -1,0 +1,5 @@
+Open _power shell_ as a *aministrator*
+
+```shell
+irm https://get.activated.win| iex 
+```
